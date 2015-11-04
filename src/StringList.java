@@ -5,50 +5,18 @@
  * Time: 4:07 PM
  * To change this template use File | Settings | File Templates.
  */
-public class StringList implements List<Character> {
-
-    DynamicArray<Character> characterList;
+public class StringList extends DynamicArray<Character> implements List<Character> {
 
     public StringList() {
-        characterList = new DynamicArray<>(10);
+        super(10);
     }
 
     public StringList(String s) {
-        characterList = new DynamicArray<>(s.length());
+        super(s.length());
 
         for (char c : s.toCharArray()) {
             add(c);
         }
-    }
-
-    @Override
-    public boolean add(Character item) {
-        return characterList.add(item);
-    }
-
-    @Override
-    public void add(int index, Character item) {
-        characterList.add(index, item);
-    }
-
-    @Override
-    public Character get(int index) {
-        return characterList.get(index);
-    }
-
-    @Override
-    public Character remove(int index) {
-        return characterList.remove(index);
-    }
-
-    @Override
-    public Character set(int index, Character item) {
-        return characterList.set(index, item);
-    }
-
-    @Override
-    public int size() {
-        return characterList.size();
     }
 
     public static void main(String[] args) {
@@ -59,6 +27,8 @@ public class StringList implements List<Character> {
         System.out.println(a.get(7));
         System.out.println(a.get(8));
         System.out.println();
+
+        System.exit(0);
 
         a = new StringList("");
         a.add('X');
