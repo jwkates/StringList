@@ -43,9 +43,7 @@ public class StringList implements List<Character> {
 
     @Override
     public Character set(int index, Character item) {
-        characterList.set(index, item);
-
-        return item;
+        return characterList.set(index, item);
     }
 
     @Override
@@ -55,23 +53,23 @@ public class StringList implements List<Character> {
 
     public static void main(String[] args) {
         StringList a = new StringList("abcdefg");
-        a.add(new Character('1'));
-        a.add(new Character('2'));
+        a.add('1');
+        a.add('2');
         System.out.println(a.get(0));
         System.out.println(a.get(7));
         System.out.println(a.get(8));
         System.out.println();
 
         a = new StringList("");
-        a.add(new Character('X'));
+        a.add('X');
         System.out.println(a.size());
-        a.add(0,new Character('Y'));
+        a.add(0, 'Y');
         System.out.println(a.size());
-        a.add(0,new Character('Z'));
+        a.add(0, 'Z');
         System.out.println(a.size());
-        a.add(1,new Character('R'));
+        a.add(1, 'R');
         System.out.println(a.size());
-        a.add(4,new Character('x'));
+        a.add(4, 'x');
         System.out.println(a.size());
 
         for (int i = 0; i < a.size(); i++)
