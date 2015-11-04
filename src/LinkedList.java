@@ -6,7 +6,7 @@
  * of the list.
  */
 
-public class LinkedList<T> {
+public class LinkedList<T> implements List<T> {
 
     /**
      * head references the sentinel node.
@@ -50,27 +50,37 @@ public class LinkedList<T> {
         size = 1;
     }
 
+    @Override
     public T get(int index) {
         return getNthNode(index).item;
     }
 
-    public void add(T item) {
+    @Override
+    public boolean add(T item) {
         // The new item is inserted after the last node
         insertAfter(head.prev, item);
+
+        return true;
     }
 
-    public void set(int index, T item) {
+    @Override
+    public T set(int index, T item) {
         LinkedListNode<T> nthNode = getNthNode(index);
+        T previousItem = nthNode.item;
 
         nthNode.item = item;
+
+        return previousItem;
     }
 
-    public void insert(int index, T item) {
+    @Override
+    public void add(int index, T item) {
         LinkedListNode<T> nthNode = getNthNode(index);
 
         insertBefore(nthNode, item);
     }
 
+    @Override
     public T remove(int index) {
         LinkedListNode<T> nthNode = getNthNode(index);
         T item = nthNode.item;
@@ -80,6 +90,10 @@ public class LinkedList<T> {
         return item;
     }
 
+    @Override
+    public int size() {
+        return size;
+    }
 
     private void insertAfter(LinkedListNode<T> node, T item) {
         LinkedListNode<T> newNode = new LinkedListNode<>(item);
@@ -121,9 +135,6 @@ public class LinkedList<T> {
         }
 
         return currentNode;
-    }
-    public int size() {
-        return size;
     }
 
     public boolean isEmpty() {
