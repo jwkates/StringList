@@ -1,3 +1,7 @@
+import java.util.Iterator;
+import java.util.Spliterator;
+import java.util.function.Consumer;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jkates
@@ -5,18 +9,76 @@
  * Time: 4:07 PM
  * To change this template use File | Settings | File Templates.
  */
-public class StringList extends DynamicArray<Character> implements List<Character> {
+public class StringList implements List<Character>, Iterable<Character> {
+
+    String s;
 
     public StringList() {
-        super(10);
+        this("");
     }
 
     public StringList(String s) {
-        super(s.length());
+        this.s = s;
+    }
 
-        for (char c : s.toCharArray()) {
-            add(c);
-        }
+    @Override
+    public boolean add(Character item) {
+        s += item;
+
+        return true;
+    }
+
+    @Override
+    public void add(int index, Character item) {
+        s = s.substring(0, index) + item + s.substring(index);
+    }
+
+    @Override
+    public Character get(int index) {
+        return s.charAt(index);
+    }
+
+    @Override
+    public Character remove(int index) {
+        Character originalCharacter = get(index);
+
+        s = s.substring(0, index) + s.substring(index + 1);
+
+        return originalCharacter;
+    }
+
+    @Override
+    public Character set(int index, Character item) {
+        Character originalCharacter = get(index);
+
+        s = s.substring(0, index) + item + s.substring(index + 1);
+
+        return originalCharacter;
+    }
+
+    @Override
+    public int size() {
+        return s.length();  //To change body of implemented methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public Iterator<Character> iterator() {
+        Iterator<Character> iterator = new Iterator<Character>() {
+
+            private int currentIndex;
+
+            @Override
+            public boolean hasNext() {
+                return currentIndex < s.length();
+            }
+
+            @Override
+            public Character next() {
+                return get(currentIndex++);
+            }
+        };
+
+        return iterator;
     }
 
     public static void main(String[] args) {
@@ -27,8 +89,6 @@ public class StringList extends DynamicArray<Character> implements List<Characte
         System.out.println(a.get(7));
         System.out.println(a.get(8));
         System.out.println();
-
-        System.exit(0);
 
         a = new StringList("");
         a.add('X');
@@ -46,6 +106,6 @@ public class StringList extends DynamicArray<Character> implements List<Characte
             System.out.print(a.get(i) + " ");
         System.out.println();
 
-
     }
+
 }
