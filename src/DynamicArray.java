@@ -5,30 +5,26 @@
  * Time: 4:44 PM
  * To change this template use File | Settings | File Templates.
  */
-public class DynamicArray<T> {
+public class DynamicArray<T> implements List<T> {
 
-    private T[] array;
+    private Object[] array;
     private int size;
 
     public DynamicArray() {
         this(10);
     }
 
-    public DynamicArray(int size) {
-        this.size = size;
-
-        array = (T[]) new Object[size];
+    public DynamicArray(int capacity) {
+        size = 0;
+        array = new Object[capacity + 1];
     }
 
-    public DynamicArray(T[] array) {
-        this.size = array.length;
-        this.array = array;
-    }
-
+    @Override
     public T get(int index) {
-        return array[index];
+        return (T) array[index];
     }
 
+    @Override
     public T set(int index, T item) {
         T previousItem = get(index);
 
@@ -37,13 +33,10 @@ public class DynamicArray<T> {
         return previousItem;
     }
 
+    @Override
     public boolean add(T item) {
         if (size == array.length) {
-            T[] newArray = (T[]) new Object[array.length * 2];
-
-            for (int i = 0; i < array.length; i++) {
-                newArray[i] = array[i];
-            }
+            reallocateArray();
         }
 
         array[size++] = item;
@@ -51,7 +44,50 @@ public class DynamicArray<T> {
         return true;
     }
 
+    @Override
+    public void add(int index, T item) {
+        if (size == array.length) {
+            reallocateArray();
+        }
+
+        for (int i = size; i > index; i--) {
+            array[i] = array[i - 1];
+        }
+
+        array[index] = item;
+
+        size++;
+    }
+
+    @Override
+    public T remove(int index) {
+        T item = (T) array[index];
 
 
+        for (int i = index; i < array.length - 1; i++) {
+            array[i] = array[i + 1];
+        }
 
+        array[size] = null;
+        size--;
+
+        return item;
+    }
+
+
+    @Override
+    public int size() {
+        return size;
+    }
+
+
+    private void reallocateArray() {
+        Object[] newArray = new Object[array.length * 2];
+
+        for (int i = 0; i < array.length; i++) {
+            newArray[i] = array[i];
+        }
+
+        array = newArray;
+    }
 }

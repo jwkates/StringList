@@ -7,28 +7,28 @@
  */
 public class StringList implements List<Character> {
 
-    LinkedList<Character> characterList;
+    DynamicArray<Character> characterList;
 
     public StringList() {
-        characterList = new LinkedList<>();
+        characterList = new DynamicArray<>(10);
     }
 
     public StringList(String s) {
-        this();
+        characterList = new DynamicArray<>(s.length());
 
-        for (Character character : s.toCharArray()) {
-            add(character);
+        for (char c : s.toCharArray()) {
+            add(c);
         }
     }
 
     @Override
-    public void add(Character item) {
-        characterList.add(item);
+    public boolean add(Character item) {
+        return characterList.add(item);
     }
 
     @Override
     public void add(int index, Character item) {
-        characterList.insert(index, item);
+        characterList.add(index, item);
     }
 
     @Override
@@ -54,7 +54,15 @@ public class StringList implements List<Character> {
     }
 
     public static void main(String[] args) {
-        StringList a = new StringList("");
+        StringList a = new StringList("abcdefg");
+        a.add(new Character('1'));
+        a.add(new Character('2'));
+        System.out.println(a.get(0));
+        System.out.println(a.get(7));
+        System.out.println(a.get(8));
+        System.out.println();
+
+        a = new StringList("");
         a.add(new Character('X'));
         System.out.println(a.size());
         a.add(0,new Character('Y'));

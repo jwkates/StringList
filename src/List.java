@@ -7,7 +7,7 @@
  */
 public interface List<T> {
 
-    public void add(T item);
+    public boolean add(T item);
 
     public void add(int index, T item);
 
