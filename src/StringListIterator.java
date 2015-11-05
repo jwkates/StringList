@@ -10,9 +10,12 @@ public class StringListIterator implements ListIterator<Character> {
     private StringList stringList;
     private int nextIndex;
 
-    public StringListIterator(StringList stringList) {
-        this.nextIndex = 0;
-        this.stringList = stringList;
+    boolean iterationRequired;
+
+    public StringListIterator(StringList list) {
+        nextIndex = 0;
+        stringList = list;
+        iterationRequired = false;
     }
 
     @Override

@@ -30,7 +30,11 @@ public class StringList implements List<Character> {
 
     @Override
     public void add(int index, Character item) {
-        s = s.substring(0, index) + item + s.substring(index);
+        if (index == size()) {
+            add(item);
+        } else {
+            s = s.substring(0, index) + item + s.substring(index);
+        }
     }
 
     @Override
@@ -56,7 +60,7 @@ public class StringList implements List<Character> {
         return originalCharacter;
     }
 
-    public ListIterator listIterator() {
+    public ListIterator<Character> listIterator() {
         return new StringListIterator(this);
     }
 
@@ -73,16 +77,15 @@ public class StringList implements List<Character> {
 
     public static void main(String[] args) {
         StringList a = new StringList( "ab" );
-        ListIterator b = a.listIterator();
+        ListIterator<Character> b = a.listIterator();
         System.out.println( a );
         System.out.println( b.hasNext() );
-        System.out.println( b.next() );
-        b.add( '0' );
+        System.out.println(b.next());
+        b.add('0');
         System.out.println( a );
-        b.add( '1' );
+        b.add('1');
         System.out.println( a );
-        System.out.println( b.hasNext() );
+        System.out.println(b.hasNext());
         System.out.println( b.next() );
     }
-
 }
