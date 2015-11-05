@@ -8,44 +8,53 @@
 public class StringListIterator implements ListIterator<Character> {
 
     private StringList stringList;
-    private int currentIndex;
+    private int nextIndex;
 
     public StringListIterator(StringList stringList) {
-        this.currentIndex = 0;
+        this.nextIndex = 0;
         this.stringList = stringList;
     }
 
     @Override
     public void add(Character item) {
-        stringList.add(currentIndex, item);
+        stringList.add(nextIndex, item);
+        nextIndex++;
+    }
+
+    @Override
+    public void remove() {
+        if (nextIndex > 0) {
+            stringList.remove(nextIndex - 1);
+            nextIndex--;
+        }
     }
 
     @Override
     public void set(Character item) {
-        stringList.set(currentIndex, item);
+        stringList.set(nextIndex - 1, item);
     }
 
     @Override
     public boolean hasPrevious() {
-        return currentIndex > 0;
+        return nextIndex > 0;
     }
 
     @Override
     public Character previous() {
-        Character prevChar = stringList.get(currentIndex - 1);
-        currentIndex--;
+        Character prevChar = stringList.get(nextIndex - 1);
+        nextIndex--;
         return prevChar;
     }
 
     @Override
     public boolean hasNext() {
-        return currentIndex < stringList.size();
+        return nextIndex < stringList.size();
     }
 
     @Override
     public Character next() {
-        Character nextChar = stringList.get(currentIndex);
-        currentIndex++;
+        Character nextChar = stringList.get(nextIndex);
+        nextIndex++;
         return nextChar;
     }
 }

@@ -83,7 +83,6 @@ public class StringList implements List<Character> {
         System.out.println( a );
         System.out.println( b.hasNext() );
         System.out.println( b.next() );
-
     }
 
 }
