@@ -1,3 +1,5 @@
+import java.util.ListIterator;
+
 /**
  * Created with IntelliJ IDEA.
  * User: jkates
@@ -47,6 +49,16 @@ public class StringListIterator implements ListIterator<Character> {
         Character prevChar = stringList.get(nextIndex - 1);
         nextIndex--;
         return prevChar;
+    }
+
+    @Override
+    public int nextIndex() {
+        return nextIndex;
+    }
+
+    @Override
+    public int previousIndex() {
+        return 0;
     }
 
     @Override

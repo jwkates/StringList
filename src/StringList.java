@@ -1,6 +1,7 @@
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.Spliterator;
-import java.util.function.Consumer;
+import java.util.List;
+import java.util.ListIterator;
 
 /**
  * Created with IntelliJ IDEA.
@@ -74,18 +75,120 @@ public class StringList implements List<Character> {
         return s.length();  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-
     public static void main(String[] args) {
-        StringList a = new StringList( "ab" );
-        ListIterator<Character> b = a.listIterator();
-        System.out.println( a );
-        System.out.println( b.hasNext() );
-        System.out.println(b.next());
-        b.add('0');
-        System.out.println( a );
-        b.add('1');
-        System.out.println( a );
-        System.out.println(b.hasNext());
-        System.out.println( b.next() );
+        // Test Case #1
+        System.out.println("--- Test Case #1 ---");
+        StringList a = new StringList("abcdefg");
+        a.add(new Character('1'));
+        a.add(new Character('2'));
+        System.out.println(a.get(0));
+        System.out.println(a.get(7));
+        System.out.println(a.get(8));
+
+        // Test Case #2
+        System.out.println("--- Test Case #2 ---");
+        a = new StringList("");
+        a.add(new Character('X'));
+        System.out.println(a.size());
+        a.add(0,new Character('Y'));
+        System.out.println(a.size());
+        a.add(0,new Character('Z'));
+        System.out.println(a.size());
+        a.add(1,new Character('R'));
+        System.out.println(a.size());
+        a.add(4,new Character('x'));
+        System.out.println(a.size());
+
+        for (int i = 0; i < a.size(); i++)
+            System.out.print(a.get(i) + " ");
+        System.out.println();
+
+
+        // Test Case #3
+        System.out.println("--- Test Case #3 ---");
+        a = new StringList("");
+        a.add(new Character('a'));
+        a.add(2, new Character('a'));
     }
+
+    @Override
+    public boolean remove(Object o) {
+        return false;
+    }
+
+    @Override
+    public boolean containsAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(Collection<? extends Character> c) {
+        return false;
+    }
+
+    @Override
+    public boolean addAll(int index, Collection<? extends Character> c) {
+        return false;
+    }
+
+    @Override
+    public boolean removeAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public boolean retainAll(Collection<?> c) {
+        return false;
+    }
+
+    @Override
+    public void clear() {
+
+    }
+
+    @Override
+    public Iterator<Character> iterator() {
+        return null;
+    }
+
+    @Override
+    public Object[] toArray() {
+        return new Object[0];
+    }
+
+    @Override
+    public <T> T[] toArray(T[] a) {
+        return null;
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
+    @Override
+    public boolean contains(Object o) {
+        return false;
+    }
+
+    @Override
+    public int indexOf(Object o) {
+        return 0;
+    }
+
+    @Override
+    public int lastIndexOf(Object o) {
+        return 0;
+    }
+
+    @Override
+    public ListIterator<Character> listIterator(int index) {
+        return null;
+    }
+
+    @Override
+    public List<Character> subList(int fromIndex, int toIndex) {
+        return null;
+    }
+
 }
